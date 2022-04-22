@@ -3,10 +3,10 @@ const {v4} = require('uuid');
 
 const db = new sqlite3.Database('./database/carmart.db');
 
-const createCar = (name, color, year, model, description, price) => {
+const createCar = (name, color, year, model, description, price, images) => {
     return new Promise((resolve, reject) => {
-        db.run(`insert into cars (name, color, year, model, description, price, id) 
-        values (?, ?, ?, ?, ?, ?, ?)`, [name, color, year, model, description, price, v4()], (error) => {
+        db.run(`insert into cars (name, color, year, model, description, price, id, images) 
+        values (?, ?, ?, ?, ?, ?, ?, ?)`, [name, color, year, model, description, price, v4(), images], (error) => {
             if (error) {
                 console.log(error)
                 reject('Error creating car entity!');
@@ -57,10 +57,10 @@ const deleteCar = (id) => {
 }
 
 
-const updateCar = (id, name, color, year, model, description, price) => {
+const updateCar = (id, name, color, year, model, description, price, images) => {
     return new Promise((resolve, reject) => {
-        db.run(`update cars set name = ?, color = ?, year = ?, model = ?, description = ?, price = ? where id = ?`, 
-            [name, color, year, model, description, price, id], (error) => {
+        db.run(`update cars set name = ?, color = ?, year = ?, model = ?, description = ?, price = ?, images = ? where id = ?`, 
+            [name, color, year, model, description, price, images, id], (error) => {
             if (error) {
                 console.log(error)
                 reject(`Error updating car with id - ${id}`);

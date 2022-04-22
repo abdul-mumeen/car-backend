@@ -8,14 +8,16 @@ const app = express();
 const port = 3000 || process.env.PORT;
 
 try {
-    db.run(`CREATE TABLE IF NOT EXISTS cars (
+    db.run(`
+    CREATE TABLE IF NOT EXISTS cars (
         id uuid PRIMARY KEY,
         color varchar(20) NOT NULL,
         year integer NOT NULL,
         name varchar(50) NOT NULL,
         model varchar(50) NOT NULL,
         price integer NOT NULL,
-        description text
+        description text,
+        images text
     )`).close();
 } catch (e) {
     console.log("Error creating the table - ", e)
